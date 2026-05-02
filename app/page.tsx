@@ -284,6 +284,7 @@ function ServiceModal({ service, onClose }) {
               ))}
             </ul>
           </div>
+          <div className="modal-divider" />
           <div className="modal-price-block">
             <div className="modal-price-label">// startprijs</div>
             <div className="modal-price">Vanaf {service.prijs}</div>
