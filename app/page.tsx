@@ -284,29 +284,27 @@ function ServiceModal({ service, onClose }) {
               ))}
             </ul>
           </div>
-          <div className="modal-footer">
-            <div className="modal-price">
-              <span style={{fontSize:10,color:'var(--gray)',display:'block',marginBottom:4,letterSpacing:1}}>// startprijs</span>
-              <span className="modal-price-num">Vanaf {service.prijs}</span>
-              <span className="modal-urgency">Beperkte plekken beschikbaar deze maand</span>
-            </div>
-            <div className="modal-ctas">
-              <a
-                href={`mailto:hello@danialkomo.com?subject=Offerte aanvraag: ${service.title}`}
-                className="btn-red"
-                style={{cursor:'pointer'}}
-              >
-                Start jouw project →
-              </a>
-              <a
-                href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(`Hallo Danial! Ik heb interesse in ${service.title}. Kun je mij meer informatie geven?`)}`}
-                className="modal-wa-link"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                WhatsApp direct →
-              </a>
-            </div>
+          <div className="modal-price-block">
+            <div className="modal-price-label">// startprijs</div>
+            <div className="modal-price">Vanaf {service.prijs}</div>
+            <div className="modal-urgency">Beperkte plekken beschikbaar deze maand</div>
+          </div>
+          <div className="modal-actions">
+            <a
+              href={`mailto:hello@danialkomo.com?subject=Offerte aanvraag: ${service.title}`}
+              className="modal-main-cta btn-red"
+              style={{cursor:'pointer'}}
+            >
+              Start jouw project →
+            </a>
+            <a
+              href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(`Hallo Danial! Ik heb interesse in ${service.title}. Kun je mij meer informatie geven?`)}`}
+              className="modal-whatsapp-cta"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              WhatsApp direct →
+            </a>
           </div>
         </div>
       </div>
