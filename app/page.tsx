@@ -125,16 +125,28 @@ const CODE_SNIPPETS = [
 ]
 
 /* ─────────────────────────── HOOKS ─────────────────────────── */
-function useReveal(threshold = 0.12) {
+function useReveal(threshold = 0) {
   const ref = useRef(null)
   const [vis, setVis] = useState(false)
+
   useEffect(() => {
     const el = ref.current
     if (!el) return
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVis(true) }, { threshold })
+
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          setVis(true)
+          obs.disconnect()
+        }
+      },
+      { threshold: 0 }
+    )
+
     obs.observe(el)
     return () => obs.disconnect()
-  }, [threshold])
+  }, [])
+
   return [ref, vis]
 }
 
@@ -152,11 +164,24 @@ function Reveal({ children, delay = 0, dir = 'up', className = '' }) {
 
 function StatCounter({ value, label, delay }) {
   const [count, setCount] = useState(0)
-  const [ref, vis] = useReveal(0.6)
+  const [inView, setInView] = useState(false)
+  const ref = useRef(null)
   const target = parseInt(value)
   const suffix = value.replace(/\d+/, '')
   useEffect(() => {
-    if (!vis) return
+    const el = ref.current
+    if (!el) return
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) setInView(true)
+    }, {
+      threshold: 0,
+      rootMargin: "0px 0px -10% 0px",
+    })
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+  useEffect(() => {
+    if (!inView) return
     let v = 0; const step = target / 55
     const t = setInterval(() => {
       v = Math.min(v + step, target)
@@ -164,9 +189,9 @@ function StatCounter({ value, label, delay }) {
       if (v >= target) clearInterval(t)
     }, 20)
     return () => clearInterval(t)
-  }, [vis, target])
+  }, [inView, target])
   return (
-    <div ref={ref} className="stat" style={{ opacity: vis ? 1 : 0, transition: `opacity .6s ease ${delay}s` }}>
+    <div ref={ref} className="stat" style={{ opacity: inView ? 1 : 0, transition: `opacity .6s ease ${delay}s` }}>
       <div className="stat-num">{count}{suffix}</div>
       <div className="stat-label">{label}</div>
     </div>
