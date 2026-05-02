@@ -162,7 +162,7 @@ function Reveal({ children, delay = 0, dir = 'up', className = '' }) {
   )
 }
 
-function StatCounter({ value, label, delay }) {
+function StatCounter({ value, label }) {
   const [count, setCount] = useState(0)
   const target = parseInt(value)
   const suffix = value.replace(/\d+/, '')
