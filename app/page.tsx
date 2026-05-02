@@ -141,6 +141,8 @@ const PROCESS = [
   { num:'04', icon:'🚀', title:'Launch & Support',   desc:'Live zetten, testen op alle apparaten en doorlopend support nadien.' },
 ]
 
+const WA_NUMBER = '31XXXXXXXXX' // replace with actual WhatsApp number (e.g. 31612345678)
+
 const PHRASES = ['npm run dev', 'git push origin main', 'vercel deploy --prod', 'node server.js', 'npm run build']
 
 const CODE_SNIPPETS = [
@@ -286,14 +288,25 @@ function ServiceModal({ service, onClose }) {
             <div className="modal-price">
               <span style={{fontSize:10,color:'var(--gray)',display:'block',marginBottom:4,letterSpacing:1}}>// startprijs</span>
               <span className="modal-price-num">Vanaf {service.prijs}</span>
+              <span className="modal-urgency">Beperkte plekken beschikbaar deze maand</span>
             </div>
-            <a
-              href={`mailto:hello@danialkomo.com?subject=Offerte aanvraag: ${service.title}`}
-              className="btn-red"
-              style={{cursor:'pointer'}}
-            >
-              Vraag offerte →
-            </a>
+            <div className="modal-ctas">
+              <a
+                href={`mailto:hello@danialkomo.com?subject=Offerte aanvraag: ${service.title}`}
+                className="btn-red"
+                style={{cursor:'pointer'}}
+              >
+                Start jouw project →
+              </a>
+              <a
+                href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(`Hallo Danial! Ik heb interesse in ${service.title}. Kun je mij meer informatie geven?`)}`}
+                className="modal-wa-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Of stuur direct een WhatsApp →
+              </a>
+            </div>
           </div>
         </div>
       </div>
