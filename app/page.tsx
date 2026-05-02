@@ -164,34 +164,20 @@ function Reveal({ children, delay = 0, dir = 'up', className = '' }) {
 
 function StatCounter({ value, label, delay }) {
   const [count, setCount] = useState(0)
-  const [inView, setInView] = useState(false)
-  const ref = useRef(null)
   const target = parseInt(value)
   const suffix = value.replace(/\d+/, '')
   useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const obs = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) setInView(true)
-    }, {
-      threshold: 0,
-      rootMargin: "0px 0px -10% 0px",
-    })
-    obs.observe(el)
-    return () => obs.disconnect()
-  }, [])
-  useEffect(() => {
-    if (!inView) return
-    let v = 0; const step = target / 55
+    let v = 0
+    const step = target / 55
     const t = setInterval(() => {
       v = Math.min(v + step, target)
       setCount(Math.floor(v))
       if (v >= target) clearInterval(t)
     }, 20)
     return () => clearInterval(t)
-  }, [inView, target])
+  }, [target])
   return (
-    <div ref={ref} className="stat" style={{ opacity: inView ? 1 : 0, transition: `opacity .6s ease ${delay}s` }}>
+    <div className="stat">
       <div className="stat-num">{count}{suffix}</div>
       <div className="stat-label">{label}</div>
     </div>
