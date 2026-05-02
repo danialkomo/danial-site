@@ -6,7 +6,15 @@
       "Bash(node -e \"const pkg = require\\('./node_modules/next/package.json'\\); console.log\\('next version:', pkg.version\\)\")",
       "PowerShell(Get-ChildItem \"C:\\\\Users\\\\dania\\\\imbisso-frontend\\\\danial-site\\\\node_modules\" -Directory | Where-Object { $_.Name -eq \"tailwindcss\" } | Select-Object Name, LastWriteTime)",
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\([k for k in d.get\\('packages',{}\\).keys\\(\\) if 'tailwind' in k.lower\\(\\)]\\)\")",
-      "Bash(node *)"
+      "Bash(node *)",
+      "Bash(npm install *)",
+      "PowerShell(\\(Get-Item \"C:\\\\Users\\\\dania\\\\imbisso-frontend\\\\danial-site\\\\app\\\\page.tsx\"\\).Length; \\(Get-Content \"C:\\\\Users\\\\dania\\\\imbisso-frontend\\\\danial-site\\\\app\\\\page.tsx\"\\).Count)",
+      "PowerShell(Get-CimInstance *)",
+      "PowerShell($env:NODE_OPTIONS = \"--max-old-space-size=6144\"; Set-Location \"C:\\\\Users\\\\dania\\\\imbisso-frontend\\\\danial-site\"; node --max-old-space-size=6144 node_modules/.bin/next build 2>&1)",
+      "PowerShell(npm run *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)"
     ]
   }
 }
