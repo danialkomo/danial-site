@@ -304,7 +304,7 @@ function ServiceModal({ service, onClose }) {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Of stuur direct een WhatsApp →
+                WhatsApp direct →
               </a>
             </div>
           </div>
