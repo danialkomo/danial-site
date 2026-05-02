@@ -13,12 +13,48 @@ const SKILLS = [
 ]
 
 const SERVICES = [
-  { num:'01', icon:'🖥',  title:'Premium Webdesign',       desc:'Op maat gemaakte websites die uw merk vertegenwoordigen en bezoekers omzetten naar klanten.', tag:'design → conversion' },
-  { num:'02', icon:'⚡',  title:'Next.js Ontwikkeling',    desc:'Moderne, snelle webapps met schone code, SEO-basis en een schaalbare, toekomstbestendige structuur.', tag:'next.js → vercel' },
-  { num:'03', icon:'🛒',  title:'WordPress & WooCommerce', desc:'Professionele WordPress sites en webshops voor ondernemers die online willen groeien.', tag:'wp → sales' },
-  { num:'04', icon:'🎯',  title:'SaaS & Dashboards',       desc:'Complete SaaS-producten met auth, subscriptions en dashboards. Van idee tot live product.', tag:'saas + mrr' },
-  { num:'05', icon:'🔍',  title:'SEO & Performance',       desc:'Technische optimalisatie voor snelheid, vindbaarheid en betere Core Web Vitals scores.', tag:'speed → ranking' },
-  { num:'06', icon:'🛡',  title:'Onderhoud & Support',     desc:'Updates, verbeteringen en doorlopend support. Uw website altijd veilig en up-to-date.', tag:'care → stable' },
+  {
+    num:'01', icon:'🖥', title:'Premium Webdesign', tag:'design → conversion',
+    desc:'Op maat gemaakte websites die uw merk vertegenwoordigen en bezoekers omzetten naar klanten.',
+    voor_wie:'Ondernemers en bedrijven die een professionele, convertierende online aanwezigheid willen.',
+    inbegrepen:['Custom design & wireframes','Responsive voor alle apparaten','CMS integratie','SEO-basis setup','1 revisieronde inbegrepen','Oplevering binnen 2 weken'],
+    prijs:'€799',
+  },
+  {
+    num:'02', icon:'⚡', title:'Next.js Ontwikkeling', tag:'next.js → vercel',
+    desc:'Moderne, snelle webapps met schone code, SEO-basis en een schaalbare, toekomstbestendige structuur.',
+    voor_wie:'Startups en scale-ups die een snelle, schaalbare webapplicatie of digitaal product nodig hebben.',
+    inbegrepen:['Next.js 15 + TypeScript','API routes & server components','Vercel deployment','SEO & performance optimalisatie','Code review & documentatie','90+ Lighthouse score'],
+    prijs:'€999',
+  },
+  {
+    num:'03', icon:'🛒', title:'WordPress & WooCommerce', tag:'wp → sales',
+    desc:'Professionele WordPress sites en webshops voor ondernemers die online willen groeien.',
+    voor_wie:'Ondernemers die een beheersbare website of webshop willen zonder technische kennis.',
+    inbegrepen:['WordPress + premium theme','WooCommerce setup','Betalingen (iDEAL, creditcard)','SEO plugin & sitemap','Admin training inbegrepen','1 maand gratis support'],
+    prijs:'€599',
+  },
+  {
+    num:'04', icon:'🎯', title:'SaaS & Dashboards', tag:'saas + mrr',
+    desc:'Complete SaaS-producten met auth, subscriptions en dashboards. Van idee tot live product.',
+    voor_wie:'Founders en teams die een eigen SaaS-product willen lanceren en snel MRR willen genereren.',
+    inbegrepen:['Auth & gebruikersbeheer','Stripe subscriptions','Admin dashboard','Subdomain per klant','MVP launch strategie','Schaalbare database (Supabase)'],
+    prijs:'€1.499',
+  },
+  {
+    num:'05', icon:'🔍', title:'SEO & Performance', tag:'speed → ranking',
+    desc:'Technische optimalisatie voor snelheid, vindbaarheid en betere Core Web Vitals scores.',
+    voor_wie:'Websites die beter gevonden willen worden in Google en sneller moeten laden.',
+    inbegrepen:['Technische SEO audit','Core Web Vitals optimalisatie','Sitemap & structured data','Meta-tags & Open Graph','Performance rapport','Maandelijkse monitoring'],
+    prijs:'€299',
+  },
+  {
+    num:'06', icon:'🛡', title:'Onderhoud & Support', tag:'care → stable',
+    desc:'Updates, verbeteringen en doorlopend support. Uw website altijd veilig en up-to-date.',
+    voor_wie:'Bedrijven die hun website veilig, snel en up-to-date willen houden zonder zorgen.',
+    inbegrepen:['Maandelijkse CMS updates','Dagelijkse backups','Security monitoring','Tot 2u aanpassingen per maand','Prioriteitsupport — reactie 24u','Maandelijks rapport'],
+    prijs:'€99/maand',
+  },
 ]
 
 const PROJECTS = [
@@ -201,6 +237,70 @@ function SkillItem({ icon, name, level, delay }) {
   )
 }
 
+/* ─────────────────────────── SERVICE MODAL ────────────────────── */
+function ServiceModal({ service, onClose }) {
+  const closeRef = useRef(onClose)
+  closeRef.current = onClose
+
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Escape') closeRef.current() }
+    document.addEventListener('keydown', onKey)
+    document.body.style.overflow = 'hidden'
+    return () => { document.removeEventListener('keydown', onKey); document.body.style.overflow = '' }
+  }, [])
+
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-panel" onClick={e => e.stopPropagation()}>
+        <div className="modal-bar">
+          <div style={{display:'flex',gap:7,alignItems:'center'}}>
+            <div className="t-btn red" /><div className="t-btn yellow" /><div className="t-btn green" />
+          </div>
+          <span className="modal-bar-title">service_{service.num}.tsx</span>
+          <button className="modal-close" onClick={onClose}>✕</button>
+        </div>
+        <div className="modal-body">
+          <div className="modal-header">
+            <span className="modal-icon">{service.icon}</span>
+            <div>
+              <div style={{fontSize:10,color:'var(--r)',letterSpacing:1,marginBottom:6}}>// {service.num} — {service.tag}</div>
+              <div className="modal-title">{service.title}</div>
+            </div>
+          </div>
+          <p className="modal-desc">{service.desc}</p>
+          <div className="modal-section">
+            <div className="modal-section-label">{'>'} Voor wie?</div>
+            <p className="modal-section-text">{service.voor_wie}</p>
+          </div>
+          <div className="modal-section">
+            <div className="modal-section-label">{'>'} Wat is inbegrepen?</div>
+            <ul className="modal-list">
+              {service.inbegrepen.map(item => (
+                <li key={item} className="modal-list-item">
+                  <span style={{color:'var(--r)',flexShrink:0}}>▸</span>{item}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="modal-footer">
+            <div className="modal-price">
+              <span style={{fontSize:10,color:'var(--gray)',display:'block',marginBottom:4,letterSpacing:1}}>// startprijs</span>
+              <span className="modal-price-num">Vanaf {service.prijs}</span>
+            </div>
+            <a
+              href={`mailto:hello@danialkomo.com?subject=Offerte aanvraag: ${service.title}`}
+              className="btn-red"
+              style={{cursor:'pointer'}}
+            >
+              Vraag offerte →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 /* ─────────────────────────── CANVAS ─────────────────────────── */
 function CodeRain() {
   const canvasRef = useRef(null)
@@ -255,6 +355,7 @@ export default function Page() {
   const [mouse, setMouse] = useState({ x: -999, y: -999 })
   const [ring, setRing] = useState({ x: -999, y: -999 })
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [selectedService, setSelectedService] = useState(null)
   const ringRef = useRef({ x: -999, y: -999 })
   const rafRef = useRef(null)
   const dotRef = useRef(null)
@@ -535,7 +636,7 @@ export default function Page() {
         <div className="srv-grid">
           {SERVICES.map((s, i) => (
             <Reveal key={s.num} delay={i * 0.07}>
-              <div className="srv-card" {...hoverProps}>
+              <div className="srv-card" {...hoverProps} onClick={() => setSelectedService(s)} style={{cursor:'pointer'}}>
                 <div className="srv-line" />
                 <div className="srv-num">// {s.num}</div>
                 <span className="srv-icon">{s.icon}</span>
@@ -637,6 +738,11 @@ export default function Page() {
           </Reveal>
         </div>
       </section>
+
+      {/* ── SERVICE MODAL ── */}
+      {selectedService && (
+        <ServiceModal service={selectedService} onClose={() => setSelectedService(null)} />
+      )}
 
       {/* ── FOOTER ── */}
       <footer className="footer">
