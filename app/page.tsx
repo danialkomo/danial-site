@@ -202,9 +202,12 @@ function Reveal({ children, delay = 0, dir = 'up', className = '' }) {
 
 function StatCounter({ value, label }) {
   const [count, setCount] = useState(0)
+  const [ref, vis] = useReveal()
   const target = parseInt(value)
   const suffix = value.replace(/\d+/, '')
+
   useEffect(() => {
+    if (!vis) return
     let v = 0
     const step = target / 55
     const t = setInterval(() => {
@@ -213,9 +216,10 @@ function StatCounter({ value, label }) {
       if (v >= target) clearInterval(t)
     }, 20)
     return () => clearInterval(t)
-  }, [target])
+  }, [vis, target])
+
   return (
-    <div className="stat">
+    <div ref={ref} className="stat">
       <div className="stat-num">{count}{suffix}</div>
       <div className="stat-label">{label}</div>
     </div>
