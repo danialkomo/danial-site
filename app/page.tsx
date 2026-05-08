@@ -14,7 +14,7 @@ const SKILLS = [
 
 const SERVICES = [
   {
-    num:'01', icon:'🖥', title:'Premium Webdesign', tag:'design → conversion',
+    num:'01', icon:'🖥️', title:'Premium Webdesign', tag:'design → conversion',
     desc:'Op maat gemaakte websites die uw merk vertegenwoordigen en bezoekers omzetten naar klanten.',
     voor_wie:'Ondernemers en bedrijven die een professionele, convertierende online aanwezigheid willen.',
     inbegrepen:['Custom design & wireframes','Responsive voor alle apparaten','CMS integratie','SEO-basis setup','1 revisieronde inbegrepen','Oplevering binnen 2 weken'],
@@ -49,7 +49,7 @@ const SERVICES = [
     prijs:'€299',
   },
   {
-    num:'06', icon:'🛡', title:'Onderhoud & Support', tag:'care → stable',
+    num:'06', icon:'🛡️', title:'Onderhoud & Support', tag:'care → stable',
     desc:'Updates, verbeteringen en doorlopend support. Uw website altijd veilig en up-to-date.',
     voor_wie:'Bedrijven die hun website veilig, snel en up-to-date willen houden zonder zorgen.',
     inbegrepen:['Maandelijkse CMS updates','Dagelijkse backups','Security monitoring','Tot 2u aanpassingen per maand','Prioriteitsupport — reactie 24u','Maandelijks rapport'],
