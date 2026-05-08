@@ -85,6 +85,7 @@ a { text-decoration: none; color: inherit; }
 @keyframes fadeUp   { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
 @keyframes fadeIn   { from{opacity:0} to{opacity:1} }
 @keyframes fadeScale{ from{opacity:0;transform:scale(.94) translateY(20px)} to{opacity:1;transform:scale(1) translateY(0)} }
+@keyframes modalIn  { from{opacity:0;transform:scale(.96) translateY(14px)} to{opacity:1;transform:scale(1) translateY(0)} }
 
 /* ── REVEAL ── */
 .reveal, .reveal-l, .reveal-r {
@@ -439,10 +440,10 @@ a { text-decoration: none; color: inherit; }
 /* ── SERVICE MODAL ── */
 .modal-overlay {
   position: fixed; inset: 0; z-index: 600;
-  background: rgba(0,0,0,.85); backdrop-filter: blur(6px);
+  background: rgba(0,0,0,.85); backdrop-filter: blur(8px);
   display: flex; align-items: center; justify-content: center;
   padding: 20px;
-  animation: fadeIn .2s var(--ease);
+  animation: fadeIn .22s var(--ease);
 }
 .modal-panel {
   background: #07070B; border: 1px solid rgba(232,17,45,.28);
@@ -450,7 +451,7 @@ a { text-decoration: none; color: inherit; }
   width: 100%; max-width: 560px; max-height: 90vh;
   display: flex; flex-direction: column;
   box-shadow: 0 0 100px rgba(232,17,45,.15), 0 40px 80px rgba(0,0,0,.7);
-  animation: fadeScale .3s var(--ease);
+  animation: modalIn .32s var(--ease);
 }
 .modal-bar {
   background: #0E0E13; padding: 13px 18px;
@@ -476,11 +477,69 @@ a { text-decoration: none; color: inherit; }
 .modal-section-text { font-size: 12px; line-height: 2; color: var(--gray); }
 .modal-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
 .modal-list-item { font-size: 12px; color: var(--gray); display: flex; align-items: baseline; gap: 10px; }
-.modal-footer {
-  margin-top: 28px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.04);
-  display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+.modal-divider {
+  height: 1px;
+  width: 100%;
+  background: rgba(232,17,45,.18);
+  margin: 28px 0 24px;
 }
-.modal-price-num { font-family: var(--display); font-size: 2rem; color: var(--white); letter-spacing: 1px; }
+.modal-price-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.modal-price-label { font-size: 10px; color: var(--gray); letter-spacing: 1px; }
+.modal-price {
+  display: block;
+  font-family: var(--display);
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1;
+  color: var(--white);
+  letter-spacing: 1px;
+}
+.modal-urgency {
+  display: block;
+  font-size: 13px;
+  color: var(--y);
+  opacity: 0.75;
+}
+.modal-urgency::before { content: '⚡ '; }
+.modal-actions {
+  margin-top: 22px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding-bottom: 4px;
+}
+.modal-whatsapp-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  font-family: var(--font);
+  font-size: 13px;
+  border: 1px solid rgba(61,255,143,.35);
+  color: var(--g);
+  cursor: pointer;
+  transition: all .3s var(--ease);
+  white-space: nowrap;
+}
+.modal-whatsapp-cta:hover {
+  border-color: var(--g);
+  background: rgba(61,255,143,.06);
+  color: var(--white);
+}
+
+@media (max-width: 640px) {
+  .modal-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .modal-whatsapp-cta {
+    justify-content: center;
+  }
+}
 
 @media (max-width: 480px) {
   .hero-wrap { padding: 90px 16px 50px; }
@@ -490,6 +549,4 @@ a { text-decoration: none; color: inherit; }
   .hero-cta { flex-direction: column; }
   .btn-red, .btn-outline { text-align: center; justify-content: center; }
   .modal-body { padding: 20px; }
-  .modal-footer { flex-direction: column; align-items: flex-start; }
-  .modal-footer .btn-red { width: 100%; justify-content: center; }
 }
