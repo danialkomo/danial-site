@@ -141,7 +141,7 @@ const PROCESS = [
   { num:'04', icon:'🚀', title:'Launch & Support',   desc:'Live zetten, testen op alle apparaten en doorlopend support nadien.' },
 ]
 
-const WA_NUMBER = '31XXXXXXXXX' // replace with actual WhatsApp number (e.g. 31612345678)
+const WA_NUMBER = '31681680930'
 
 const PHRASES = ['npm run dev', 'git push origin main', 'vercel deploy --prod', 'node server.js', 'npm run build']
 
@@ -747,8 +747,13 @@ export default function Page() {
               </a>
             </div>
             <div className="contact-socials">
-              {['LinkedIn','GitHub','Instagram','WhatsApp'].map(n => (
-                <a key={n} href="#" className="social-link" {...hoverProps}>{n}</a>
+              {[
+                { name:'LinkedIn',  href:'https://www.linkedin.com/in/danial-komo-601b09169' },
+                { name:'GitHub',    href:'https://github.com/danialkomo' },
+                { name:'Instagram', href:'https://www.instagram.com/danial_komo' },
+                { name:'WhatsApp',  href:'https://wa.me/31681680930' },
+              ].map(({ name, href }) => (
+                <a key={name} href={href} className="social-link" {...hoverProps} target="_blank" rel="noopener noreferrer">{name}</a>
               ))}
             </div>
           </Reveal>
@@ -765,8 +770,12 @@ export default function Page() {
         <div className="footer-l"><span>~/danial-komo</span> — Developer &amp; Designer</div>
         <div className="footer-m">© 2026 — Winterswijk, Nederland</div>
         <div className="footer-r">
-          {['LinkedIn','GitHub','Instagram'].map(n => (
-            <a key={n} href="#" {...hoverProps}>{n}</a>
+          {[
+            { name:'LinkedIn',  href:'https://www.linkedin.com/in/danial-komo-601b09169' },
+            { name:'GitHub',    href:'https://github.com/danialkomo' },
+            { name:'Instagram', href:'https://www.instagram.com/danial_komo' },
+          ].map(({ name, href }) => (
+            <a key={name} href={href} {...hoverProps} target="_blank" rel="noopener noreferrer">{name}</a>
           ))}
         </div>
       </footer>
