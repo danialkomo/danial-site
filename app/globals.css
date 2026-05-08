@@ -8,9 +8,9 @@
   --b: #5C9DFF;
   --y: #FFD060;
   --p: #C792EA;
-  --bg: #06060A;
-  --bg2: #0D0D11;
-  --bg3: #111116;
+  --bg: #0B0B10;
+  --bg2: #121217;
+  --bg3: #16161B;
   --white: #F2EEE8;
   --gray: #4A4A55;
   --line: rgba(232,17,45,.14);
@@ -117,10 +117,10 @@ a { text-decoration: none; color: inherit; }
   animation: fadeUp .9s var(--ease) .35s both;
 }
 .hero-red {
-  background: linear-gradient(135deg, #FF2D4A 0%, #E8112D 50%, #A00020 100%);
+  background: linear-gradient(135deg, #FF4060 0%, #E8112D 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0 0 50px rgba(232,17,45,.4));
+  filter: drop-shadow(0 0 50px rgba(232,17,45,.5));
 }
 .hero-ghost { -webkit-text-stroke: 1.5px rgba(232,17,45,.45); color: transparent; }
 .hero-glitch { position: relative; display: block; }
